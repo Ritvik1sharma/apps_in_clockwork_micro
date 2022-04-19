@@ -1,0 +1,244 @@
+
+#
+# Preferences
+#
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set plugin-enable-groupscope 0
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set savedlg-simulator ppe
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 730x500+261+33}] != ""} {
+    window geometry "Design Browser 1" 730x500+261+33
+}
+window target "Design Browser 1" on
+browser using {Design Browser 1}
+browser set \
+    -signalsort name
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1010x600+106+67}] != ""} {
+    window geometry "Waveform 1" 1010x600+106+67
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar visibility partial
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -label Sync_Signals -comment Sync_Signals]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.clk
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rst
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.cpp_testbench_active
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.rst
+	} ]
+set id [waveform add -label DUT -comment DUT]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_0_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_0_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_0_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_1_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_1_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_1_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_2_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_2_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_2_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_3_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_3_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_filter_dw_stencil_clkwrk_3_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_filter_pw_stencil_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_filter_pw_stencil_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_filter_pw_stencil_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_4_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_4_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_input_stencil_clkwrk_4_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_5_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_5_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_input_stencil_clkwrk_5_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_6_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_6_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_input_stencil_clkwrk_6_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_7_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_7_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_input_stencil_clkwrk_7_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_output_stencil_clkwrk_10_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_output_stencil_clkwrk_10_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_output_stencil_clkwrk_10_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_output_stencil_clkwrk_8_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_output_stencil_clkwrk_8_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_output_stencil_clkwrk_8_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_output_stencil_clkwrk_9_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_output_stencil_clkwrk_9_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_output_stencil_clkwrk_9_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -label STALL_Controls -comment STALL_Controls]
+set id [waveform add -label OutputCompare -comment OutputCompare]
+set id [waveform add -label hw_output_stencil_clkwrk_10_values_val -comment hw_output_stencil_clkwrk_10_values_val]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_10_values_val_comp._compare_cnt_sig
+	} ]
+waveform format $id -color blue -namecolor blue
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_10_values_val_comp._golden_sig
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_10_values_val_comp._dut_sig
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_10_values_val_comp._error_cnt_sig
+	} ]
+waveform format $id -color red -namecolor red
+set id [waveform add -label hw_output_stencil_clkwrk_8_values_val -comment hw_output_stencil_clkwrk_8_values_val]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_8_values_val_comp._compare_cnt_sig
+	} ]
+waveform format $id -color blue -namecolor blue
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_8_values_val_comp._golden_sig
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_8_values_val_comp._dut_sig
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_8_values_val_comp._error_cnt_sig
+	} ]
+waveform format $id -color red -namecolor red
+set id [waveform add -label hw_output_stencil_clkwrk_9_values_val -comment hw_output_stencil_clkwrk_9_values_val]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_9_values_val_comp._compare_cnt_sig
+	} ]
+waveform format $id -color blue -namecolor blue
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_9_values_val_comp._golden_sig
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_9_values_val_comp._dut_sig
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_stencil_clkwrk_9_values_val_comp._error_cnt_sig
+	} ]
+waveform format $id -color red -namecolor red
+set id [waveform add -label Active_Processes -comment Active_Processes]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.mobilenet_struct_inst.mobilenet_core_inst.mobilenet_core_staller_inst.core_wen
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.deadlocked
+	} ]
+set id [waveform add -label Assertions -comment Assertions]
+set id [waveform add -label CoverDirectives -comment CoverDirectives]
+set id [waveform add -label Internal_Channels -comment Internal_Channels]
+
+waveform xview limits 114ns 2114ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 730x250+261+564
+
+#
+# Layout selection
+#

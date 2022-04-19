@@ -1,0 +1,633 @@
+
+#
+# Preferences
+#
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set plugin-enable-groupscope 0
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set savedlg-simulator ppe
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 730x500+261+33}] != ""} {
+    window geometry "Design Browser 1" 730x500+261+33
+}
+window target "Design Browser 1" on
+browser using {Design Browser 1}
+browser set \
+    -signalsort name
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1010x600+65+185}] != ""} {
+    window geometry "Waveform 1" 1010x600+65+185
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar visibility partial
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -label Sync_Signals -comment Sync_Signals]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.clk
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rst
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.cpp_testbench_active
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.rst
+	} ]
+set id [waveform add -label DUT -comment DUT]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_0_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_0_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_input_stencil_clkwrk_0_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_1_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_1_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_input_stencil_clkwrk_1_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_2_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_2_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_input_stencil_clkwrk_2_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_3_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_3_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_input_stencil_clkwrk_3_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_4_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_4_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_input_stencil_clkwrk_4_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_5_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_input_stencil_clkwrk_5_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_input_stencil_clkwrk_5_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_output_global_wrapper_stencil_clkwrk_6_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_output_global_wrapper_stencil_clkwrk_6_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_output_global_wrapper_stencil_clkwrk_6_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_output_global_wrapper_stencil_clkwrk_7_values_rsc_rdy
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.hw_output_global_wrapper_stencil_clkwrk_7_values_rsc_vld
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.hw_output_global_wrapper_stencil_clkwrk_7_values_rsc_dat[15:0]}
+	} ]
+set id [waveform add -label STALL_Controls -comment STALL_Controls]
+set id [waveform add -label OutputCompare -comment OutputCompare]
+set id [waveform add -label hw_output_global_wrapper_stencil_clkwrk_6_values_val -comment hw_output_global_wrapper_stencil_clkwrk_6_values_val]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_global_wrapper_stencil_clkwrk_6_values_val_comp._compare_cnt_sig
+	} ]
+waveform format $id -color blue -namecolor blue
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_global_wrapper_stencil_clkwrk_6_values_val_comp._golden_sig
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_global_wrapper_stencil_clkwrk_6_values_val_comp._dut_sig
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_global_wrapper_stencil_clkwrk_6_values_val_comp._error_cnt_sig
+	} ]
+waveform format $id -color red -namecolor red
+set id [waveform add -label hw_output_global_wrapper_stencil_clkwrk_7_values_val -comment hw_output_global_wrapper_stencil_clkwrk_7_values_val]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_global_wrapper_stencil_clkwrk_7_values_val_comp._compare_cnt_sig
+	} ]
+waveform format $id -color blue -namecolor blue
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_global_wrapper_stencil_clkwrk_7_values_val_comp._golden_sig
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_global_wrapper_stencil_clkwrk_7_values_val_comp._dut_sig
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.user_tb.hw_output_global_wrapper_stencil_clkwrk_7_values_val_comp._error_cnt_sig
+	} ]
+waveform format $id -color red -namecolor red
+set id [waveform add -label Active_Processes -comment Active_Processes]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.harris_color_core_inst.harris_color_core_staller_inst.core_wen
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.deadlocked
+	} ]
+set id [waveform add -label Assertions -comment Assertions]
+set id [waveform add -label CoverDirectives -comment CoverDirectives]
+set id [waveform add -label Internal_Channels -comment Internal_Channels]
+set id [waveform add -label harris_color_struct_inst/cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f3_vals_val_rsc_comp -comment harris_color_struct_inst/cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f3_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f3_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f3_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f3_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f3_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f3_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f3_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f3_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f7_vals_val_rsc_comp -comment harris_color_struct_inst/cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f7_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f7_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f7_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f7_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f7_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f7_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f7_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_182_merged_banks_9_f7_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f3_vals_val_rsc_comp -comment harris_color_struct_inst/cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f3_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f3_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f3_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f3_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f3_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f3_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f3_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f3_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f7_vals_val_rsc_comp -comment harris_color_struct_inst/cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f7_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f7_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f7_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f7_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f7_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f7_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f7_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.cim_stencil_cim_stencil_op_hcompute_cim_stencil_1_178_merged_banks_9_f7_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f3_vals_val_rsc_comp -comment harris_color_struct_inst/gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f3_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f3_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f3_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f3_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f3_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f3_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f3_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f3_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f7_vals_val_rsc_comp -comment harris_color_struct_inst/gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f7_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f7_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f7_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f7_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f7_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f7_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f7_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_138_merged_banks_12_f7_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f3_vals_val_rsc_comp -comment harris_color_struct_inst/gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f3_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f3_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f3_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f3_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f3_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f3_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f3_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f3_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f7_vals_val_rsc_comp -comment harris_color_struct_inst/gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f7_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f7_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f7_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f7_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f7_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f7_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f7_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.gray_stencil_gray_stencil_op_hcompute_gray_stencil_1_134_merged_banks_12_f7_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f3_vals_val_rsc_comp -comment harris_color_struct_inst/lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f3_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f3_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f3_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f3_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f3_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f3_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f3_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f3_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f7_vals_val_rsc_comp -comment harris_color_struct_inst/lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f7_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f7_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f7_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f7_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f7_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f7_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f7_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_12_merged_banks_9_f7_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f3_vals_val_rsc_comp -comment harris_color_struct_inst/lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f3_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f3_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f3_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f3_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f3_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f3_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f3_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f3_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f7_vals_val_rsc_comp -comment harris_color_struct_inst/lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f7_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f7_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f7_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f7_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f7_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f7_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f7_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxx_stencil_lxx_stencil_op_hcompute_lxx_stencil_1_10_merged_banks_9_f7_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f3_vals_val_rsc_comp -comment harris_color_struct_inst/lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f3_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f3_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f3_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f3_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f3_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f3_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f3_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f3_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f7_vals_val_rsc_comp -comment harris_color_struct_inst/lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f7_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f7_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f7_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f7_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f7_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f7_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f7_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_1_4_merged_banks_9_f7_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f3_vals_val_rsc_comp -comment harris_color_struct_inst/lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f3_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f3_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f3_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f3_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f3_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f3_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f3_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f3_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f7_vals_val_rsc_comp -comment harris_color_struct_inst/lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f7_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f7_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f7_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f7_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f7_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f7_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f7_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lxy_stencil_lxy_stencil_op_hcompute_lxy_stencil_7_merged_banks_9_f7_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f3_vals_val_rsc_comp -comment harris_color_struct_inst/lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f3_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f3_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f3_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f3_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f3_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f3_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f3_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f3_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f7_vals_val_rsc_comp -comment harris_color_struct_inst/lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f7_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f7_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f7_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f7_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f7_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f7_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f7_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_1_0_merged_banks_9_f7_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f3_vals_val_rsc_comp -comment harris_color_struct_inst/lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f3_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f3_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f3_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f3_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f3_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f3_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f3_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f3_vals_val_rsc_comp.depth
+	} ]
+set id [waveform add -label harris_color_struct_inst/lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f7_vals_val_rsc_comp -comment harris_color_struct_inst/lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f7_vals_val_rsc_comp]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f7_vals_val_rsc_comp.radr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f7_vals_val_rsc_comp.wadr[5:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f7_vals_val_rsc_comp.d[15:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f7_vals_val_rsc_comp.q[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f7_vals_val_rsc_comp.we
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f7_vals_val_rsc_comp.re
+	} ]
+set id [waveform add -signals  {
+	simulator::scverify_top.rtl.harris_color_struct_inst.lyy_stencil_lyy_stencil_op_hcompute_lyy_stencil_2_merged_banks_9_f7_vals_val_rsc_comp.depth
+	} ]
+
+waveform xview limits 6032.318048ns 6052ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 730x250+261+564
+
+#
+# Layout selection
+#
